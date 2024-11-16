@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import New
+from .models import New, Comentario
 
 
 @admin.register(New)
@@ -31,3 +31,13 @@ class NewAdmin(admin.ModelAdmin):
         if not request.user.is_superuser:
             obj.autor = request.user
         super().save_model(request, obj, form, change)
+
+@admin.register(Comentario)
+class ComentarioAdmin(admin.ModelAdmin):
+    list_display = ('new', '_autor', 'criado', 'ativado')
+    list_filter = ('new', 'ativado')
+    ordering = ('new', 'ativado')
+    list_editable = ['ativado']
+
+    def _autor(self, instance):
+        return instance.usuario.get_full_name()

@@ -25,3 +25,18 @@ class New(models.Model):
     def __str__(self):
         return self.titulo
 
+
+class Comentario(models.Model):
+    new = models.ForeignKey(New, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    corpo = models.TextField()
+    criado = models.DateTimeField(auto_now_add=True)
+    ativado = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = 'Comentário'
+        verbose_name_plural = 'Comentários'
+        ordering = ['-criado']
+
+    def __str__(self):
+        return f'Comentário de: {self.usuario.get_full_name()}'
