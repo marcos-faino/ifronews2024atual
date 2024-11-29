@@ -22,6 +22,15 @@
                         <a href="{% url 'comentnew' new.id %}"
                            class="btn btn-success">Comentar</a>
                     </div>
+                    <div class="col-md-10 col-lg-8 col-xl-7 text-center text-primary">
+                        <h3>Comentários</h3>
+                    </div>
+                    {% for c in comentarios %}
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h5>{{ c }} em {{ c.criado }}</h5>
+                        <p>{{ c.corpo }}</p>
+                    </div>
+                    {%endfor%}
                 </div>
             </div>
         </article>

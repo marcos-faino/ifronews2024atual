@@ -58,7 +58,7 @@ ROOT_URLCONF = 'ifronews.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['news/templates', 'usuario/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

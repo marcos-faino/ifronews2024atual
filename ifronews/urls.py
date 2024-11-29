@@ -20,6 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
+    path('usuarios/', include('usuario.urls')),
 ]
 
 admin.site.site_title = "Ifro News"

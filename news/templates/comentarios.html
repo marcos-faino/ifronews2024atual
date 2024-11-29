@@ -16,7 +16,8 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <form method="post" class="form">
                             {% csrf_token %}
-                            {{ form.as_div }}
+                            <h4>Deixe seu Comentário:</h4>
+                            <div>{{ form.corpo }}</div>
                             <input type="submit" class="btn btn-primary" value="Salvar">
                         </form>
                     </div>

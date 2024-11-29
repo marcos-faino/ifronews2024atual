@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 
 from news.forms import ComentarioModelForm
-from news.models import New
+from news.models import New, Comentario
 
 
 class IndexView(ListView):
@@ -18,6 +18,17 @@ class NewDetailView(DetailView):
     template_name = 'new.html'
     model = New
     context_object_name = 'new'
+
+
+    def _get_coments(self):
+        return Comentario.objects.filter(new=self.object).all()
+
+
+    def get_context_data(self, **kwargs):
+        cont = super().get_context_data(**kwargs)
+        cont['comentarios'] = self._get_coments()
+        return cont
+
 
 
 class SobreView(TemplateView):
