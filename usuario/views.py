@@ -2,9 +2,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.views import LogoutView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, FormView
 
@@ -20,7 +20,9 @@ class UsuarioCreateView(CreateView):
         form.cleaned_data
         usuario = form.save(commit=False)
         usuario.is_staff = True
+        grupo = get_object_or_404(Group, name='usuariosPremium')
         form.save()
+        usuario.groups.add(grupo)
         messages.success(self.request, f"Usuário Cadastrado!!!")
         return super().form_valid(form)
 
